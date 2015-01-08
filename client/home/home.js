@@ -4,12 +4,14 @@ Template.home.helpers({
   }
 });
 
-
 Template.home.events({
   'submit #new-project': function (event) {
     event.preventDefault();
 
-    Projects.insert({name: event.target.name.value});
+    Projects.insert({
+      name: event.target.name.value,
+      ownerId: Meteor.userId()
+    });
   },
   'click .delete-project': function (event) {
     Projects.remove({_id: this._id});
