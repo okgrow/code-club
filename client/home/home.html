@@ -1,3 +1,17 @@
-<template name="Home">
-  Hello?
+<template name="home">
+
+  <form id="new-project">
+    Project name:
+    <input name="name"/>
+
+    <input type="submit" value="Create Project"/>
+  </form>
+
+  <ul>
+    {{#each allProjects}}
+      <li>
+        {{name}}
+      </li>
+    {{/each}}
+  </ul>
 </template>
