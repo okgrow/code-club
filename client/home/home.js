@@ -1,3 +1,5 @@
+Meteor.subscribe("projects");
+
 Template.home.helpers({
   allProjects: function () {
     return Projects.find();

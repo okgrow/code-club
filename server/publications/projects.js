@@ -1,6 +1,6 @@
-// Meteor.publish("projects", function () {
-//   return Projects.find();
-// });
+Meteor.publish("projects", function () {
+  return Projects.find();
+});
 
 Projects.allow({
   insert: function (userId, doc) {
