@@ -10,5 +10,8 @@ Template.home.events({
     event.preventDefault();
 
     Projects.insert({name: event.target.name.value});
+  },
+  'click .delete-project': function (event) {
+    Projects.remove({_id: this._id});
   }
 });
