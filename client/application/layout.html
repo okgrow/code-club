@@ -3,6 +3,10 @@
 </head>
 
 <template name="ApplicationLayout">
+  <nav>
+    {{> loginButtons}}
+  </nav>
+  
   <h1> Meteor Code Club</h1>
 
   {{> yield}}
