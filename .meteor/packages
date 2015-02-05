@@ -8,3 +8,4 @@ meteor-platform
 iron:router
 accounts-ui
 accounts-meetup
+http

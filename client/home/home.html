@@ -1,5 +1,11 @@
 <template name="home">
 
+  <ul>
+    {{#each allMeetups}}
+      <a href="{{url}}">Name: {{name}}, time: {{time}}</a>
+    {{/each}}
+  </ul>
+
   <form id="new-project">
     Project name:
     <input name="name"/>

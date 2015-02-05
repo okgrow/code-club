@@ -1,8 +1,12 @@
 Meteor.subscribe("projects");
+Meteor.subscribe("meetups");
 
 Template.home.helpers({
   allProjects: function () {
     return Projects.find();
+  },
+  allMeetups: function () {
+    return Meetups.find();
   }
 });
 
