@@ -1,5 +1,5 @@
 Meteor.subscribe("projects");
-Meteor.subscribe("meetups");
+Meteor.subscribe("currentMeetup");
 
 Template.home.helpers({
   allProjects: function () {
