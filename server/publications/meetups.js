@@ -1,3 +1,6 @@
 Meteor.publish("meetups", function() {
-  return Meetups.find();
+  // Time 00:00 today
+  var today = new Date().setHours(0);
+
+  return Meetups.find({time: {$gt: today}});
 });
