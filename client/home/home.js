@@ -5,8 +5,8 @@ Template.home.helpers({
   allProjects: function () {
     return Projects.find();
   },
-  allMeetups: function () {
-    return Meetups.find();
+  meetup: function () {
+    return Meetups.findOne();
   }
 });
 
@@ -16,7 +16,8 @@ Template.home.events({
 
     Projects.insert({
       name: event.target.name.value,
-      ownerId: Meteor.userId()
+      ownerId: Meteor.userId(),
+      meetupId: this._id
     });
   },
   'click .delete-project': function (event) {
