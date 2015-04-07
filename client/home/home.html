@@ -1,27 +1,68 @@
 <template name="home">
 
-  <div id="meetup-details">
+  <div id="meetup-details" class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Meetup details</h3>
+    </div>
 
-    <h2>Meetup details</h2>
-
-    <a href={{url}}>Name: {{name}}</a>,
-    Time: {{formatDate time}}
-
+    <div class="panel-body">
+      <p>
+        <li class="fa fa-calendar"></li> <a href={{url}}>{{name}}</a>
+        &nbsp;
+        <li class="fa fa-clock-o"></li> {{formatDate time}}
+      </p>
+    </div>
   </div>
 
-  <form id="new-project">
-    Project name:
-    <input name="name">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Projects</h3>
+    </div>
 
-    <input type="submit" value="Create Project">
-  </form>
+    <div class="panel-body">
+      <form id="new-project">
 
-  <ul>
-    {{#each allProjects}}
-      <li>
-        {{name}}
-        <button class="delete-project">Delete</button>
-      </li>
-    {{/each}}
-  </ul>
+        <div class="form-group">
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-paw"></i>
+            </span>
+            <input name="name" class="form-control" placeholder="Name" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-github-alt"></i>
+            </span>
+            <input name="gitHubUrl" class="form-control" placeholder="GitHub Link">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <input type="submit" value="Create Project" class="btn btn-primary">
+        </div>
+
+      </form>
+    </div>
+
+    <ul class="list-group">
+      <div class="clearboth"></div>
+
+      {{#each allProjects}}
+        <li class="list-group-item">
+          <li class="fa fa-paw"></li> {{name}}
+          &nbsp;
+          <li class="fa fa-github-alt"></li>  <a href="{{gitHubUrl}}" target="_blank">GitHub Link</a>
+          &nbsp;
+          <small class="text-muted"><i class="fa fa-user"></i> {{ownerName}}</small>
+          <button class="delete-project btn btn-danger btn-xs pull-right">
+            <i class="fa fa-close"></i>
+          </button>
+        </li>
+      {{/each}}
+
+    </ul>
+  </div>
 </template>

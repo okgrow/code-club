@@ -13,6 +13,8 @@ Template.home.events({
 
     Projects.insert({
       name: event.target.name.value,
+      gitHubUrl: event.target.gitHubUrl.value,
+      ownerName: Meteor.user().profile.name,
       ownerId: Meteor.userId(),
       meetupId: this._id
     });
