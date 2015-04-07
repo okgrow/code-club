@@ -4,9 +4,6 @@ Meteor.subscribe("currentMeetup");
 Template.home.helpers({
   allProjects: function () {
     return Projects.find();
-  },
-  meetup: function () {
-    return Meetups.findOne();
   }
 });
 

@@ -1,24 +1,20 @@
 <template name="home">
 
-  {{#with meetup}}
+  <div id="meetup-details">
 
-    <div id="meetup-details">
+    <h2>Meetup details</h2>
 
-      <h2>Meetup details</h2>
+    <a href={{url}}>Name: {{name}}</a>,
+    Time: {{formatDate time}}
 
-      <a href={{url}}>Name: {{name}}</a>,
-      Time: {{formatDate time}}
+  </div>
 
-    </div>
+  <form id="new-project">
+    Project name:
+    <input name="name">
 
-    <form id="new-project">
-      Project name:
-      <input name="name">
-
-      <input type="submit" value="Create Project">
-    </form>
-
-  {{/with}}
+    <input type="submit" value="Create Project">
+  </form>
 
   <ul>
     {{#each allProjects}}

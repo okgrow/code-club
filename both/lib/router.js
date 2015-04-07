@@ -3,5 +3,6 @@ Router.configure({
 });
 
 Router.route('/', function () {
-  this.render('Home');
+  var meetup = Meetups.findOne();
+  this.render('home', { data: meetup });
 });
