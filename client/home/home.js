@@ -3,7 +3,7 @@ Meteor.subscribe("currentMeetup");
 
 Template.home.helpers({
   allProjects: function () {
-    return Projects.find({}, {sort: {name: 1}});
+    return Projects.find({meetupId: this._id}, {sort: {name: 1}});
   }
 });
 
