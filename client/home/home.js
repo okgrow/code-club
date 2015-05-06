@@ -11,6 +11,11 @@ Template.home.events({
   'submit #new-project': function (event) {
     event.preventDefault();
 
+    if (!Meteor.user()) {
+      // shouldn't get here
+      return;
+    }
+
     Projects.insert({
       name: event.target.name.value,
       gitHubUrl: event.target.gitHubUrl.value,
