@@ -21,7 +21,8 @@ Template.home.events({
       gitHubUrl: event.target.gitHubUrl.value,
       ownerName: Meteor.user().profile.name,
       ownerId: Meteor.userId(),
-      meetupId: this._id
+      meetupId: this._id,
+      description: event.target.description.value
     });
   },
   'click .delete-project': function (event) {
