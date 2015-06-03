@@ -17,3 +17,12 @@ Projects.allow({
   },
   fetch: ['ownerId']
 });
+
+Meteor.methods({
+  joinProject: function (projectId, userId) {
+    Projects.update({_id: projectId}, {$addToSet: {users: userId}});
+  },
+  leaveProject: function (projectId, userId) {
+    Projects.update({_id: projectId}, {$pull: {users: userId}});
+  }
+});

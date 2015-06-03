@@ -4,6 +4,9 @@ Meteor.subscribe("currentMeetup");
 Template.home.helpers({
   allProjects: function () {
     return Projects.find({meetupId: this._id}, {sort: {name: 1}});
+  },
+  inProject: function () {
+    return this.users && _.contains(this.users, Meteor.userId());
   }
 });
 
@@ -27,5 +30,11 @@ Template.home.events({
   },
   'click .delete-project': function (event) {
     Projects.remove({_id: this._id});
+  },
+  'click #join-project-button': function (event) {
+    Meteor.call("joinProject", this._id, Meteor.userId());
+  },
+  'click #leave-project-button': function (event) {
+    Meteor.call("leaveProject", this._id, Meteor.userId());
   }
 });
