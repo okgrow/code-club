@@ -20,6 +20,11 @@ Projects.allow({
 
 Meteor.methods({
   joinProject: function (projectId, userId) {
+    // Leave other projects from the same meetup
+    var project = Projects.findOne({_id: projectId});
+    Projects.update({meetupId: project.meetupId}, {$pull: {users: userId}}, {multi: true});
+    
+    // Join this one
     Projects.update({_id: projectId}, {$addToSet: {users: userId}});
   },
   leaveProject: function (projectId, userId) {
