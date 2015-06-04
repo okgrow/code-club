@@ -1,5 +1,6 @@
 Meteor.publish("projects", function () {
-  return Projects.find();
+  var currentMeetup = currentMeetupCursor().fetch()[0];
+  return Projects.find({meetupId: currentMeetup._id});
 });
 
 Projects.allow({
