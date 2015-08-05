@@ -4,5 +4,5 @@ Meteor.publish("users", function () {
   Projects.find({meetupId: currentMeetup._id}).forEach(function (proj) {
     userIds = userIds.concat(proj.users);
   });
-  return Meteor.users.find({_id: {$in: userIds}});
+  return Meteor.users.find({_id: {$in: userIds}}, {fields: {profile: 1}});
 });
