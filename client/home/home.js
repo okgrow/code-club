@@ -7,7 +7,12 @@ Template.home.helpers({
     return Projects.find({meetupId: this._id}, {sort: {name: 1}});
   },
   inProject: function () {
-    return this.users && _.contains(this.users, Meteor.userId());
+    return this.userIds && _.contains(this.userIds, Meteor.userId());
+  },
+  users: function () {
+    return _.map(this.userIds, function (userId) {
+      return Meteor.users.findOne(userId);
+    });
   }
 });
 

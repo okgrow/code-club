@@ -23,12 +23,12 @@ Meteor.methods({
   joinProject: function (projectId, userId) {
     // Leave other projects from the same meetup
     var project = Projects.findOne({_id: projectId});
-    Projects.update({meetupId: project.meetupId}, {$pull: {users: userId}}, {multi: true});
+    Projects.update({meetupId: project.meetupId}, {$pull: {userIds: userId}}, {multi: true});
     
     // Join this one
-    Projects.update({_id: projectId}, {$addToSet: {users: userId}});
+    Projects.update({_id: projectId}, {$addToSet: {userIds: userId}});
   },
   leaveProject: function (projectId, userId) {
-    Projects.update({_id: projectId}, {$pull: {users: userId}});
+    Projects.update({_id: projectId}, {$pull: {userIds: userId}});
   }
 });

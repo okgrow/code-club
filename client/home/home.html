@@ -60,7 +60,7 @@
 
       {{#each allProjects}}
         <li class="list-group-item">
-          <li class="fa fa-paw"></li> {{name}}
+          <li class="fa"></li> {{name}}
           &nbsp;
           <li class="fa fa-github-alt"></li>  <a href="{{gitHubUrl}}" target="_blank">GitHub Link</a>
           &nbsp;
@@ -77,6 +77,13 @@
           <button class="delete-project btn btn-danger btn-xs pull-right">
             <i class="fa fa-close"></i>
           </button>
+          <ul>
+            {{#each users}}
+              <li>
+                {{this.profile.name}}
+              </li>
+            {{/each}}
+          </ul>
         </li>
       {{/each}}
 
