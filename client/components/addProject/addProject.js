@@ -28,5 +28,7 @@ Template.addProject.events({
       meetupId: this._id,
       description: event.target.description.value
     });
+    // reset form
+    $('#new-project')[0].reset();
   }
 });
