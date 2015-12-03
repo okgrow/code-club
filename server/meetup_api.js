@@ -29,11 +29,14 @@ var upsertEvent = function (event) {
 };
 
 var importMeetups = function importMeetups() {
-  var events = retrieveMeetups();
-  _.each(events, function (event) {
-    upsertEvent(event);
-  });
-
+  try {
+    var events = retrieveMeetups();
+    _.each(events, function (event) {
+      upsertEvent(event);
+    });
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 Meteor.startup(function () {
