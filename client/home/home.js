@@ -12,6 +12,9 @@ Template.home.helpers({
   inProject: function () {
     return this.userIds && _.contains(this.userIds, Meteor.userId());
   },
+  ownsProject: function () {
+    return this.ownerId == Meteor.userId();
+  },
   users: function () {
     return _.map(this.userIds, function (userId) {
       return Meteor.users.findOne(userId);
@@ -28,7 +31,7 @@ Template.home.events({
       return;
     }
 
-    Projects.insert({
+    projectId = Projects.insert({
       name: event.target.name.value,
       gitHubUrl: event.target.gitHubUrl.value,
       ownerName: Meteor.user().profile.name,

@@ -23,6 +23,11 @@ Meteor.methods({
   joinProject: function (projectId, userId) {
     // Leave other projects from the same meetup
     var project = Projects.findOne({_id: projectId});
+    
+    if (project.ownerId == userId) {
+      return;
+    }
+    
     Projects.update({meetupId: project.meetupId}, {$pull: {userIds: userId}}, {multi: true});
     
     // Join this one
