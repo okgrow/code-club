@@ -5,17 +5,19 @@
     {{#if gitHubUrl}}<li class="fa fa-github-alt"></li>  <a href="{{gitHubUrl}}" target="_blank">GitHub Link</a>{{/if}}
     &nbsp;
     <small class="text-muted"><i class="fa fa-user"></i> {{ownerName}}</small>
-    {{#if inProject}}
-      <button id="leave-project-button">
-        Leave
-      </button>
-    {{else}}
-      {{#unless ownsProject}}
-        <button id="join-project-button">
-          Join
-        </button>
-      {{/unless}}
-    {{/if}}
+    {{#if currentUser}}
+		  {{#if inProject}}
+		    <button id="leave-project-button">
+		      Leave
+		    </button>
+		  {{else}}
+		    {{#unless ownsProject}}
+		      <button id="join-project-button">
+		        Join
+		      </button>
+		    {{/unless}}
+		  {{/if}}
+		{{/if}}
     {{#if ownsProject}}
       <button class="delete-project btn btn-danger btn-xs pull-right">
         <i class="fa fa-close"></i>
