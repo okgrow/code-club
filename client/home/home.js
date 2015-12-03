@@ -1,6 +1,9 @@
 Meteor.subscribe("currentMeetup");
 Meteor.subscribe("projects");
-Meteor.subscribe("users");
+Tracker.autorun(function () {
+  Meteor.subscribe("users");
+});
+
 
 Template.home.helpers({
   allProjects: function () {
