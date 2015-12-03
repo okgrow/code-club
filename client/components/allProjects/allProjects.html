@@ -1,0 +1,15 @@
+<template name="allProjects">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Projects</h3>
+    </div>
+    <div class="panel-body">
+    	<ul class="list-group">
+		    <div class="clearboth"></div>
+		    {{#each allProjects}}
+		      {{> project}}
+		    {{/each}}
+		  </ul>
+  	</div>
+  </div>
+</template>

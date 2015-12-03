@@ -7,3 +7,13 @@ FlowRouter.route('/', {
     });
   }
 });
+
+FlowRouter.route('/add-project', {
+	name: "addProject",
+	action() {
+		BlazeLayout.render('layout', {
+			top: 'header',
+			main: 'addProject'
+		})
+	}
+});
