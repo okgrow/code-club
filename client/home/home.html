@@ -7,14 +7,15 @@
           <div class="panel-heading">
             <h3 class="panel-title">Meetup details</h3>
           </div>
-
+          {{#with currentMeetup}}
           <div class="panel-body">
             <p>
-              <li class="fa fa-calendar"></li> <a href={{url}}>{{name}}</a>
+              <li class="fa fa-calendar"></li> <a href={{this.url}}>{{this.name}}</a>
               &nbsp;
-              <li class="fa fa-clock-o"></li> {{formatDate time}}
+              <li class="fa fa-clock-o"></li> {{formatDate this.time}}
             </p>
           </div>
+          {{/with}}
         </div>
 
         <div class="panel panel-default">
@@ -29,7 +30,7 @@
                 <div class="form-group">
                   <div class="input-group">
                     <span class="input-group-addon">
-                      <i class="fa fa-paw"></i>
+                      <i class="fa fa-desktop"></i>
                     </span>
                     <input name="name" class="form-control" placeholder="Name" required>
                   </div>

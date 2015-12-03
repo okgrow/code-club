@@ -1,8 +1,11 @@
-Meteor.subscribe("currentMeetup");
-Meteor.subscribe("projects");
-Tracker.autorun(function () {
-  Meteor.subscribe("users");
-});
+Template.home.onRendered(function() {
+  var self = this;
+  self.autorun(function() {
+    self.subscribe("currentMeetup");
+    self.subscribe("projects");
+    self.subscribe("users");
+  });
+})
 
 
 Template.home.helpers({
@@ -19,6 +22,10 @@ Template.home.helpers({
     return _.map(this.userIds, function (userId) {
       return Meteor.users.findOne(userId);
     });
+  },
+  currentMeetup: function() {
+    var today = new Date().setHours(0);
+    return Meetups.findOne({time: {$gt: today}}, {limit: 1});
   }
 });
 
