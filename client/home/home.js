@@ -44,9 +44,9 @@ Template.home.events({
     Projects.remove({_id: this._id});
   },
   'click #join-project-button': function (event) {
-    Meteor.call("joinProject", this._id, Meteor.userId());
+    Meteor.call("joinProject", this._id);
   },
   'click #leave-project-button': function (event) {
-    Meteor.call("leaveProject", this._id, Meteor.userId());
+    Meteor.call("leaveProject", this._id);
   }
 });
