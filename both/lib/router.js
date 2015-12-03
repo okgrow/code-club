@@ -1,8 +1,9 @@
-Router.configure({
-  layoutTemplate: 'ApplicationLayout'
-});
-
-Router.route('/', function () {
-  var meetup = Meetups.findOne();
-  this.render('home', { data: meetup });
+FlowRouter.route('/', {
+  name: 'home',
+  action() {
+    BlazeLayout.render('layout', { 
+    	top: 'header', 
+    	main: 'home' 
+    });
+  }
 });

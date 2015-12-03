@@ -2,25 +2,7 @@
   <title>Meteor Code Club</title>
 </head>
 
-<template name="ApplicationLayout">
-
-    <nav class="navbar navbar-default navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="#">Meteor Code Club</a>
-        </div>
-
-        <div class="collapse navbar-collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li>{{> loginButtons}}</li>
-          </ul>
-
-          <div class="clearfix"></div>
-        </div>
-      </div>
-    </nav>
-
-  <div class="container">
-    {{> yield}}
-  </div>
+<template name="layout">
+  {{> Template.dynamic template=top}}
+  {{> Template.dynamic template=main}}
 </template>
