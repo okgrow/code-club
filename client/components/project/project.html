@@ -2,7 +2,7 @@
 	<li class="list-group-item">
     <li class="fa"></li> {{name}}
     &nbsp;
-    <li class="fa fa-github-alt"></li>  <a href="{{gitHubUrl}}" target="_blank">GitHub Link</a>
+    {{#if gitHubUrl}}<li class="fa fa-github-alt"></li>  <a href="{{gitHubUrl}}" target="_blank">GitHub Link</a>{{/if}}
     &nbsp;
     <small class="text-muted"><i class="fa fa-user"></i> {{ownerName}}</small>
     {{#if inProject}}
@@ -21,6 +21,15 @@
         <i class="fa fa-close"></i>
       </button>
     {{/if}}
+    {{#if description}}
+    	<!-- Collapse id needs to be unique -->
+      <button class="btn btn-info btn-xs pull-right"  data-toggle="collapse" data-target="#{{_id}}" aria-expanded="false" aria-controls="{{_id}}">
+        Info
+      </button>
+      <div class="collapse" id="{{_id}}">
+				<p>{{description}}</p>
+			</div>
+		{{/if}}
     <ul>
       {{#each users}}
         <li>
