@@ -38,5 +38,9 @@ var importMeetups = function importMeetups() {
 
 Meteor.startup(function () {
   importMeetups();
+  
+  // Do it again once per day
+  Meteor.setInterval(importMeetups, 24 * 60 * 60 * 1000);
+  
   console.log("Meetups: ", Meetups.find().fetch()); // TODO remove this, for debugging only
 });
