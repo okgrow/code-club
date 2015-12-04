@@ -1,0 +1,16 @@
+<template name="meetup">
+	<div id="meetup-details" class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Meetup details</h3>
+    </div>
+    
+    <div class="panel-body">
+      <p>
+        <li class="fa fa-calendar"></li> <a href={{this.url}} target="_blank">{{this.name}}</a>
+        &nbsp;
+        <li class="fa fa-clock-o"></li> {{formatDate this.time}}
+      </p>
+    </div>
+    
+  </div>
+</template>
