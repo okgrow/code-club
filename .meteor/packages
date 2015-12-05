@@ -8,7 +8,6 @@ kadira:flow-router
 kadira:blaze-layout
 accounts-ui
 accounts-meetup
-accounts-password
 http
 momentjs:moment
 less
