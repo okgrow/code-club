@@ -8,8 +8,5 @@ Template.allProjects.onRendered(function() {
 Template.allProjects.helpers({
   allProjects: function () {
     return Projects.find({meetupId: this._id}, {sort: {name: 1}});
-  },
-  atLeastOne: function() {
-  	return Projects.find({meetupId: this._id}, {sort: {name: 1}}).fetch().length > 0;
   }
 });

@@ -6,13 +6,11 @@
     <div class="panel-body">
     	<ul class="list-group">
 		    <div class="clearboth"></div>
-		    {{#if atLeastOne}}
-			    {{#each allProjects}}
-			      {{> project}}
-			    {{/each}}
+		    {{#each allProjects}}
+		      {{> project}}
 		    {{else}}
 			    Looks like there aren't any projects yet, create one <a href="/add-project">here</a>
-		    {{/if}}
+		    {{/each}}
 		  </ul>
   	</div>
   </div>
