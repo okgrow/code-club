@@ -1,43 +1,39 @@
 <template name="project">
-	<li class="list-group-item">
-    <li class="fa"></li> {{name}}
-    &nbsp;
-    {{#if gitHubUrl}}<li class="fa fa-github-alt"></li>  <a href="{{gitHubUrl}}" target="_blank">GitHub Link</a>{{/if}}
-    &nbsp;
-    <small class="text-muted"><i class="fa fa-user"></i> {{ownerName}}</small>
-    {{#if currentUser}}
-		  {{#if inProject}}
-		    <button id="leave-project-button">
-		      Leave
-		    </button>
-		  {{else}}
-		    {{#unless ownsProject}}
-		      <button id="join-project-button">
-		        Join
-		      </button>
-		    {{/unless}}
-		  {{/if}}
-		{{/if}}
-    {{#if ownsProject}}
-      <button class="delete-project btn btn-danger btn-xs pull-right">
-        <i class="fa fa-close"></i>
-      </button>
-    {{/if}}
-    {{#if description}}
-    	<!-- Collapse id needs to be unique -->
-      <button class="btn btn-info btn-xs pull-right"  data-toggle="collapse" data-target="#{{_id}}" aria-expanded="false" aria-controls="{{_id}}">
-        Info
-      </button>
-      <div class="collapse" id="{{_id}}">
-				<p>{{description}}</p>
-			</div>
-		{{/if}}
-    <ul>
-      {{#each users}}
-        <li>
-          {{this.profile.name}}
-        </li>
-      {{/each}}
-    </ul>
-  </li>
+	<div class="panel panel-success">
+    <div class="panel-heading">
+      {{name}} &nbsp;
+      {{#if gitHubUrl}}<li class="fa fa-github-alt"></li>  <a href="{{gitHubUrl}}" target="_blank">GitHub Link</a>{{/if}} &nbsp;
+      <small class="text-muted"><i class="fa fa-user"></i> {{ownerName}}</small>
+      {{#if currentUser}}
+        {{#if inProject}}
+          <button class="btn btn-xs btn-danger pull-right" id="leave-project-button">
+            Leave
+          </button>
+        {{else}}
+          {{#unless ownsProject}}
+            <button class="btn btn-xs btn-primary pull-right" id="join-project-button">
+              Join
+            </button>
+          {{/unless}}
+        {{/if}}
+      {{/if}}
+      {{#if ownsProject}}
+        <button class="delete-project btn btn-danger btn-xs pull-right">
+          <i class="fa fa-close"></i>
+        </button>
+      {{/if}}
+    </div>
+    <div class="panel-body">
+      {{#if description}}
+        <p>{{description}}</p>
+      {{/if}}
+      <ul>
+        {{#each users}}
+          <li>
+            {{this.profile.name}}
+          </li>
+        {{/each}}
+      </ul>
+    </div>
+  </div>
 </template>
