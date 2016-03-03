@@ -6,13 +6,18 @@ var retrieveMeetups = function retrieveMeetups() {
   // just put the signed request URL here.
 
   // This API call retrieves the next upcoming meetup
-  var SIGNED_URL = "https://api.meetup.com/2/events?status=upcoming&order=time&limited_events=True&group_urlname=Meteor-Code-Club&desc=false&offset=0&photo-host=public&format=json&page=1&fields=&sig_id=8845990&sig=cdaa33eacb50e2c1c5612a4a7548bbef46ed3327";
+  var SIGNED_URL = "https://api.meetup.com/torontojs/events?desc=Bring&photo-host=public&page=20&sig_id=8845990&sig=a9eb269ae558ed807b07b85dc099db4fc3412547";
 
   var response = HTTP.get(SIGNED_URL, {timeout: 60000});
 
   var events = null;
-  if (response && response.data && response.data.results) {
-    events = response.data.results;
+  if (response && response.data) {
+    events = response.data.filter((event) => {
+
+      if (event.name === "JS Code Club") {
+        return true;
+      }
+    });
   }
 
   return events;
@@ -23,7 +28,7 @@ var upsertEvent = function (event) {
     meetupId: event.id,
     name: event.name,
     time: event.time,
-    url: event.event_url
+    url: event.link
   };
   Meetups.upsert({meetupId: event.id}, eventToInsert);
 };
