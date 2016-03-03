@@ -1,5 +1,5 @@
 Meteor.publish("projects", function () {
-  if (currentMeetupCursor.count() === 0) {
+  if (currentMeetupCursor().count() === 0) {
     console.error("No meetups found!");
     this.ready();
     return;
