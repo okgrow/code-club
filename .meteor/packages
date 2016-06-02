@@ -15,7 +15,6 @@ mrt:bootstrap-3
 fortawesome:fontawesome
 es5-shim
 ecmascript
-standard-minifiers
 meteor-base
 mobile-experience
 mongo
@@ -29,3 +28,5 @@ random
 ejson
 spacebars
 check
+standard-minifier-css
+standard-minifier-js

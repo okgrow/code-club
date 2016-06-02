@@ -1,3 +1,11 @@
+// Meteor imports
+import { Meteor } from 'meteor/meteor';
+
+// App
+import { Meetups } from '../../../imports/api/meetups/collections.js';
+import { Projects } from '../../../imports/api/projects/collections.js';
+
+
 Template.project.onRendered(function() {
 	var self = this;
 	self.autorun(function() {

@@ -1,13 +1,20 @@
+// Meteor imports
+import { Meteor } from 'meteor/meteor';
+
+// App
+import { Meetups } from '../../../imports/api/meetups/collections.js';
+import { Projects } from '../../../imports/api/projects/collections.js';
+
 Template.addProject.onRendered(function() {
 	var self = this;
   self.autorun(function() {
-    self.subscribe("currentMeetup");    
+    self.subscribe("currentMeetup");
   });
 });
 Template.addProject.helpers({
   currentMeetup: function() {
     var today = new Date().setHours(0);
-    return Meetups.findOne({time: {$gt: today}}, {limit: 1});
+    return Meetups.findOne({ time: { $gt: today } }, { limit: 1 });
   }
 });
 
