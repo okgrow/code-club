@@ -25,7 +25,9 @@
       "airbnb",
       "plugin:meteor/recommended"
     ],
-    "rules": {}
+    "rules": {
+      "no-console": 0
+    }
   },
   "dependencies": {
     "react": "^15.1.0",
