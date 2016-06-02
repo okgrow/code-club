@@ -1,9 +1,11 @@
+/* global moment */
+
 import { Meetups } from "./collections.js";
 
 export const currentMeetupCursor = () => {
-  // Time 00:00 today
-  const today = new Date().setHours(0);
-  return Meetups.find({ time: { $gt: today } }, { limit: 1 });
+  // Time 00:00 today in UTC-5 time zone
+  const today = moment().utcOffset(-300).startOf("day").toDate();
+  return Meetups.find({ time: { $gt: today.getTime() } }, { limit: 1 });
 };
 
 const retrieveMeetups = () => {
@@ -14,17 +16,26 @@ const retrieveMeetups = () => {
   // just put the signed request URL here.
 
   // This API call retrieves the next upcoming meetup
-  const SIGNED_URL = "https://api.meetup.com/2/events?status=upcoming&order=time&limited_events=True&group_urlname=Meteor-Code-Club&desc=false&offset=0&photo-host=public&format=json&page=1&fields=&sig_id=8845990&sig=cdaa33eacb50e2c1c5612a4a7548bbef46ed3327";
+  const SIGNED_URL = "https://api.meetup.com/torontojs/events?desc=Bring&photo-host=public&page=20&sig_id=8845990&sig=a9eb269ae558ed807b07b85dc099db4fc3412547";
   const response = HTTP.get(SIGNED_URL, { timeout: 60000 });
-  return response && response.data && response.data.results || null;
+
+  var events = null;
+  if (response && response.data) {
+    events = response.data.filter((event) => {
+      if (event.name === "JS Code Club") {
+        return true;
+      }
+    });
+  }
+  return events;
 };
 
 const upsertEvent = function (event) {
-  var eventToInsert = {
+  const eventToInsert = {
     meetupId: event.id,
     name: event.name,
     time: event.time,
-    url: event.event_url
+    url: event.link,
   };
 
   Meetups.upsert({ meetupId: event.id }, eventToInsert);

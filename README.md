@@ -5,4 +5,4 @@ This is an app that we're playing around with at [JS Code Club](http://www.meetu
 
 It's purpose is to provide a place to post projects and find people to work on them at JS Code Club.
 
-It's hosted at http://code-club.meteor.com/
+It's hosted at https://code-club.herokuapp.com
