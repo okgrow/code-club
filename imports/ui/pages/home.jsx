@@ -3,7 +3,7 @@ import React from 'react';
 
 // App
 import MeetupComponent from '/imports/ui/components/meetups.jsx';
-import ProjectComponent from '/imports/ui/components/projects.jsx';
+import ProjectContainer from '/imports/ui/containers/project.js';
 
 
 export const HomePage = React.createClass({
@@ -17,7 +17,7 @@ export const HomePage = React.createClass({
 
     renderProjects() {
         if (this.props.currentMeetup) {
-            return <ProjectComponent meetup={this.props.currentMeetup}/>
+            return <ProjectContainer params={{ meetup: this.props.currentMeetup }} />
         }
     },
 
