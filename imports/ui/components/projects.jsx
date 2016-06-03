@@ -5,11 +5,62 @@ class ProjectDetail extends React.Component {
         super(props);
         this.displayName = 'ProjectDetail';
     }
+    renderUrl(url) {
+        if (url) {
+            return (
+                <div>
+                    <li className="fa fa-github-alt"></li>
+                    <a href={url} target="_blank">
+                        GitHub Link
+                    </a>
+                </div>
+            );
+        };
+    }
+
+    renderMembers(userIds) {
+        if (userIds && userIds.length !== 0) {
+            // {{#each users}}
+            //   <li>
+            //     {{this.profile.name}}
+            //   </li>
+            // {{/each}}
+        }
+    }
+
+    renderLoggedInContent() {
+        if (Meteor.userId()) {
+
+        }
+    }
+
     render() {
+        const {
+            name,
+            gitHubUrl,
+            ownerName,
+            description,
+            userIds
+        } = this.props.project;
+
         return (
-            <div class="panel panel-success">
-                <div class="panel-heading">
-                    {this.props.project.name}&nbsp;
+            <div className="panel panel-success">
+                <div className="panel-heading">
+                    { name }&nbsp;
+                    { this.renderUrl(gitHubUrl) }&nbsp;
+                    <small className="text-muted">
+                        <i className="fa fa-user"></i>
+                        { ownerName }
+                    </small>
+                </div>
+
+                { this.renderLoggedInContent() }
+
+                <div className="panel-body">
+                    { description ? <p>{{description}}</p> : "" }
+                  <ul>
+                    { this.renderMembers(userIds) }
+                  </ul>
                 </div>
             </div>
         );
@@ -26,7 +77,7 @@ export default class ProjectComponent extends React.Component {
         if (this.props.projects && this.props.projects.length !== 0) {
             return this.props.projects.map(x => {
                 return (
-                    <ProjectDetail project={x}/>
+                    <ProjectDetail project={x} key={x._id} />
                 );
             });
 
@@ -41,6 +92,12 @@ export default class ProjectComponent extends React.Component {
     }
 
     render() {
+        if (this.props.isLoading) {
+            return (
+                <div>Loading</div>
+            );
+        }
+
         return (
             <div className="panel panel-default">
                 <div className="panel-heading">
