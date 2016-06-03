@@ -28,9 +28,18 @@
     "rules": {}
   },
   "dependencies": {
+    "moment": "^2.13.0",
     "react": "^15.1.0",
+    "react-addons-create-fragment": "^15.1.0",
+    "react-addons-css-transition-group": "^15.1.0",
+    "react-addons-linked-state-mixin": "^15.1.0",
+    "react-addons-perf": "^15.1.0",
     "react-addons-pure-render-mixin": "^15.1.0",
-    "react-dom": "^15.1.0"
+    "react-addons-test-utils": "^15.1.0",
+    "react-addons-transition-group": "^15.1.0",
+    "react-addons-update": "^15.1.0",
+    "react-dom": "^15.1.0",
+    "react-mounter": "^1.2.0"
   },
   "devDependencies": {
     "eslint": "^2.11.1",
