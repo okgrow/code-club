@@ -23,7 +23,7 @@ export default class ProjectComponent extends React.Component {
     }
 
     renderProjects() {
-        if (this.props.projects && this.props.projects.length === 0) {
+        if (this.props.projects && this.props.projects.length !== 0) {
             return this.props.projects.map(x => {
                 return (
                     <ProjectDetail project={x}/>
