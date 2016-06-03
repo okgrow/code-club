@@ -6,7 +6,13 @@ class ProjectDetail extends React.Component {
         this.displayName = 'ProjectDetail';
     }
     render() {
-        return <div>ProjectDetail</div>;
+        return (
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    {this.props.project.name}&nbsp;
+                </div>
+            </div>
+        );
     }
 }
 
@@ -17,10 +23,10 @@ export default class ProjectComponent extends React.Component {
     }
 
     renderProjects() {
-        if (this.props.projects) {
+        if (this.props.projects && this.props.projects.length === 0) {
             return this.props.projects.map(x => {
                 return (
-                    <ProjectDetail />
+                    <ProjectDetail project={x}/>
                 );
             });
 
