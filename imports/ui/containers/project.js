@@ -12,7 +12,7 @@ import { Projects } from '/imports/api/projects/collections.js';
 import { createContainer } from 'meteor/react-meteor-data';
 
 export default ProjectContainer = createContainer(({ params }) => {
-    const handler = Meteor.subscribe("currentMeetup");
+    const handler = Meteor.subscribe("projects");
     const { meetup } = params;
     const data = {
         isLoading: !handler.ready(),
