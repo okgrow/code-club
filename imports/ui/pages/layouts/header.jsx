@@ -1,4 +1,8 @@
+// React
 import React from 'react';
+
+// App
+import AccountsUIWrapper from '/imports/ui/components/accounts.jsx';
 
 export const HeaderLayout = React.createClass({
   displayName: 'HeaderLayout',
@@ -20,6 +24,7 @@ export const HeaderLayout = React.createClass({
 
             <div className="collapse navbar-collapse" id="navbar-collapse">
               <ul className="nav navbar-nav navbar-right">
+                <AccountsUIWrapper />
               </ul>
             </div>
           </div>
