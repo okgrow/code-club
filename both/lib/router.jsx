@@ -4,7 +4,8 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import { mount } from 'react-mounter';
 
 // App
-import { HomeContainer } from '/imports/ui/containers/home.js';
+import { HomeContainer } from '/imports/ui/pages/home.jsx';
+import { ProjectCreateContainer } from '/imports/ui/pages/projects/create.jsx';
 import { MainLayout } from '/imports/ui/pages/layouts/main.jsx';
 
 
@@ -20,9 +21,8 @@ FlowRouter.route('/', {
 FlowRouter.route('/add-project', {
 	name: "addProject",
 	action() {
-		BlazeLayout.render('layout', {
-			top: 'header',
-			main: 'addProject'
-		})
+    mount(MainLayout, {
+      content: <ProjectCreateContainer />
+    });
 	}
 });
