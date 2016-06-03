@@ -1,4 +1,14 @@
+// NPM
 import React from 'react';
+
+// Meteor
+import { Meteor } from 'meteor/meteor';
+
+// Atmosphere
+import { createContainer } from 'meteor/react-meteor-data';
+
+// App
+import { Projects } from '/imports/api/projects/collections.js';
 
 class ProjectDetail extends React.Component {
     constructor(props) {
@@ -67,7 +77,7 @@ class ProjectDetail extends React.Component {
     }
 }
 
-export default class ProjectComponent extends React.Component {
+class ProjectComponent extends React.Component {
     constructor(props) {
         super(props);
         this.displayName = 'ProjectComponent';
@@ -118,3 +128,18 @@ export default class ProjectComponent extends React.Component {
         );
     }
 }
+
+export const ProjectComponentContainer = createContainer(({ params }) => {
+    const handler = Meteor.subscribe("projects");
+    const { meetup } = params;
+    const data = {
+        isLoading: !handler.ready(),
+        meetup: meetup
+    };
+
+    if (!data.isLoading) {
+        const today = new Date().setHours(0);
+        data.projects = Projects.find({ meetupId: meetup._id }, { sort: { name: 1 } } ).fetch();
+    }
+    return data;
+}, ProjectComponent);
