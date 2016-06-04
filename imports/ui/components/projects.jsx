@@ -10,16 +10,16 @@ import { createContainer } from 'meteor/react-meteor-data';
 // App
 import { Projects } from '/imports/api/projects/collections.js';
 
-class ProjectDetail extends React.Component {
+class ProjectDetailComponent extends React.Component {
     constructor(props) {
         super(props);
-        this.displayName = 'ProjectDetail';
+        this.displayName = 'ProjectDetailComponent';
     }
     renderUrl(url) {
         if (url) {
             return (
                 <div>
-                    <li className="fa fa-github-alt"></li>
+                    <li className="fa fa-github-alt"></li> &nbsp;
                     <a href={url} target="_blank">
                         GitHub Link
                     </a>
@@ -28,19 +28,63 @@ class ProjectDetail extends React.Component {
         };
     }
 
-    renderMembers(userIds) {
+    renderMembers() {
+        const { userIds } = this.props.project;
         if (userIds && userIds.length !== 0) {
-            // {{#each users}}
-            //   <li>
-            //     {{this.profile.name}}
-            //   </li>
-            // {{/each}}
+            const users = userIds.map(userId => Meteor.users.findOne(userId));
+            return users.map(user => {
+                return (
+                    <li>
+                        { user.profile.name }
+                    </li>
+                );
+            });
         }
+    }
+
+    leaveProject(_id, ev) {
+        ev.preventDefault();
+        Meteor.call("leaveProject", _id);
+    }
+
+    deleteProject(_id, ev) {
+        ev.preventDefault();
+        Projects.remove({_id: _id});
+    }
+
+    joinProject(_id, ev) {
+        ev.preventDefault();
+        Meteor.call("joinProject", _id);
     }
 
     renderLoggedInContent() {
         if (Meteor.userId()) {
+            const { ownerId, userIds } = this.props.project;
 
+            if (userIds && userIds.indexOf(Meteor.userId()) !== -1) { // In project
+                return (
+                    <button className="btn btn-xs btn-danger pull-right"
+                        id="leave-project-button"
+                        onClick={this.leaveProject.bind(this, this.props.project._id)}>
+                        Leave
+                    </button>
+                )
+            } else if (ownerId === Meteor.userId()) { // Owns project
+                return (
+                    <button className="delete-project btn btn-danger btn-xs pull-right"
+                        onClick={this.deleteProject.bind(this, this.props.project._id)}>
+                        <i className="fa fa-close"></i>
+                    </button>
+                );
+            } else { // Rest of the cases
+                return (
+                    <button className="btn btn-xs btn-primary pull-right"
+                        id="join-project-button"
+                        onClick={this.joinProject.bind(this, this.props.project._id)}>
+                        Join
+                    </button>
+                );
+            }
         }
     }
 
@@ -50,32 +94,39 @@ class ProjectDetail extends React.Component {
             gitHubUrl,
             ownerName,
             description,
-            userIds
         } = this.props.project;
 
         return (
             <div className="panel panel-success">
                 <div className="panel-heading">
-                    { name }&nbsp;
-                    { this.renderUrl(gitHubUrl) }&nbsp;
+                    { name } &nbsp;
+                    { this.renderUrl(gitHubUrl) } &nbsp;
                     <small className="text-muted">
-                        <i className="fa fa-user"></i>
+                        <i className="fa fa-user"></i> &nbsp;
                         { ownerName }
                     </small>
+
+                    { this.renderLoggedInContent() }
                 </div>
 
-                { this.renderLoggedInContent() }
-
                 <div className="panel-body">
-                    { description ? <p>{{description}}</p> : "" }
+                    { description ? <p>{description}</p> : "" }
                   <ul>
-                    { this.renderMembers(userIds) }
+                    { this.renderMembers() }
                   </ul>
                 </div>
             </div>
         );
     }
 }
+
+export const ProjectDetailComponentContainer = createContainer(() => {
+    const handler = Meteor.subscribe("users");
+    const data = {
+        isLoading: !handler.ready()
+    };
+    return data;
+}, ProjectDetailComponent);
 
 class ProjectComponent extends React.Component {
     constructor(props) {
@@ -87,7 +138,7 @@ class ProjectComponent extends React.Component {
         if (this.props.projects && this.props.projects.length !== 0) {
             return this.props.projects.map(x => {
                 return (
-                    <ProjectDetail project={x} key={x._id} />
+                    <ProjectDetailComponentContainer project={x} key={x._id} />
                 );
             });
 
