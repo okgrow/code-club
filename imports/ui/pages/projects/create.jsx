@@ -6,15 +6,31 @@ import { Meteor } from 'meteor/meteor';
 
 // Atmosphere
 import { createContainer } from 'meteor/react-meteor-data';
+import { FlowRouter } from 'meteor/kadira:flow-router';
 
 // App
 import { Meetups } from '/imports/api/meetups/collections.js';
+import { Projects } from '/imports/api/projects/collections.js';
 
 export default ProjectCreatePage = React.createClass({
     displayName: 'ProjectCreatePage',
 
     submitForm(ev) {
         ev.preventDefault();
+        console.log("Submit Form", this.props);
+        // If user is not authenticated or the current meetup as not been set
+        if (!Meteor.user() || !this.props.currentMeetup) return;
+
+        Projects.insert({
+            name: ev.target.name.value,
+            gitHubUrl: ev.target.gitHubUrl.value,
+            ownerName: Meteor.user().profile.name,
+            ownerId: Meteor.userId(),
+            meetupId: this.props.currentMeetup._id,
+            description: ev.target.description.value
+        });
+
+        FlowRouter.go('/');
     },
 
     renderForm() {
@@ -70,6 +86,12 @@ export default ProjectCreatePage = React.createClass({
     },
 
     render() {
+        if (this.props.isLoading) {
+            return (
+                <div>Loading</div>
+            );
+        }
+
         return (
             <div className="panel panel-default">
                 <div className="panel-heading">
