@@ -17,15 +17,14 @@ export default ProjectCreatePage = React.createClass({
 
     submitForm(ev) {
         ev.preventDefault();
-        console.log("Submit Form", this.props);
         // If user is not authenticated or the current meetup as not been set
-        if (!Meteor.user() || !this.props.currentMeetup) return;
+        if (!this.props.currentUser || !this.props.currentMeetup) return;
 
         Projects.insert({
             name: ev.target.name.value,
             gitHubUrl: ev.target.gitHubUrl.value,
-            ownerName: Meteor.user().profile.name,
-            ownerId: Meteor.userId(),
+            ownerName: this.props.currentUser.profile.name,
+            ownerId: this.props.currentUser._id,
             meetupId: this.props.currentMeetup._id,
             description: ev.target.description.value
         });
@@ -34,7 +33,7 @@ export default ProjectCreatePage = React.createClass({
     },
 
     renderForm() {
-        if (Meteor.user()) {
+        if (this.props.currentUser) {
             return (
                 <form id="new-project" onSubmit={this.submitForm}>
                     <div className="form-group">
@@ -110,6 +109,7 @@ export const ProjectCreateContainer = createContainer(() => {
     const handler = Meteor.subscribe("currentMeetup");
     const data = {
         isLoading: !handler.ready(),
+        currentUser: Meteor.user()
     };
 
     if (!data.isLoading) {
