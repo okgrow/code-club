@@ -1,5 +1,6 @@
 // NPM
 import React from 'react';
+import lodash from 'lodash';
 
 // Meteor
 import { Meteor } from 'meteor/meteor';
@@ -31,10 +32,14 @@ class ProjectDetailComponent extends React.Component {
     renderMembers() {
         const { userIds } = this.props.project;
         if (userIds && userIds.length !== 0) {
-            const users = userIds.map(userId => Meteor.users.findOne(userId));
+            const users = lodash.chain(userIds)
+                .map(userId => Meteor.users.findOne(userId))
+                .filter(Boolean) // Incase user cannot be found, filter undefined values.
+                .value();
+
             return users.map(user => {
                 return (
-                    <li>
+                    <li key={user._id}>
                         { user.profile.name }
                     </li>
                 );
@@ -58,10 +63,10 @@ class ProjectDetailComponent extends React.Component {
     }
 
     renderLoggedInContent() {
-        if (Meteor.userId()) {
+        if (this.props.currentUser) {
             const { ownerId, userIds } = this.props.project;
 
-            if (userIds && userIds.indexOf(Meteor.userId()) !== -1) { // In project
+            if (userIds && userIds.indexOf(this.props.currentUser._id) !== -1) { // In project
                 return (
                     <button className="btn btn-xs btn-danger pull-right"
                         id="leave-project-button"
@@ -69,7 +74,7 @@ class ProjectDetailComponent extends React.Component {
                         Leave
                     </button>
                 )
-            } else if (ownerId === Meteor.userId()) { // Owns project
+            } else if (ownerId === this.props.currentUser._id) { // Owns project
                 return (
                     <button className="delete-project btn btn-danger btn-xs pull-right"
                         onClick={this.deleteProject.bind(this, this.props.project._id)}>
@@ -120,14 +125,6 @@ class ProjectDetailComponent extends React.Component {
     }
 }
 
-export const ProjectDetailComponentContainer = createContainer(() => {
-    const handler = Meteor.subscribe("users");
-    const data = {
-        isLoading: !handler.ready()
-    };
-    return data;
-}, ProjectDetailComponent);
-
 class ProjectComponent extends React.Component {
     constructor(props) {
         super(props);
@@ -138,7 +135,12 @@ class ProjectComponent extends React.Component {
         if (this.props.projects && this.props.projects.length !== 0) {
             return this.props.projects.map(x => {
                 return (
-                    <ProjectDetailComponentContainer project={x} key={x._id} />
+                    <ProjectDetailComponent
+                        project={x}
+                        key={x._id}
+                        members={this.props.members}
+                        currentUser={this.props.currentUser}
+                    />
                 );
             });
 
@@ -182,15 +184,21 @@ class ProjectComponent extends React.Component {
 
 export const ProjectComponentContainer = createContainer(({ params }) => {
     const handler = Meteor.subscribe("projects");
+    const userHandler = Meteor.subscribe("users");
     const { meetup } = params;
     const data = {
-        isLoading: !handler.ready(),
+        isLoading: !handler.ready() || !userHandler.ready(),
         meetup: meetup
     };
 
     if (!data.isLoading) {
         const today = new Date().setHours(0);
         data.projects = Projects.find({ meetupId: meetup._id }, { sort: { name: 1 } } ).fetch();
+        data.members = Meteor.users.find({}).fetch();
+
+        // To allow the did update cycle to update the UI on login or logout, need to pass in the current
+        // user as a prop
+        data.currentUser = Meteor.user();
     }
     return data;
 }, ProjectComponent);
