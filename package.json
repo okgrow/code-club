@@ -28,6 +28,7 @@
     "rules": {}
   },
   "dependencies": {
+    "lodash": "^4.13.1",
     "moment": "^2.13.0",
     "react": "^15.1.0",
     "react-addons-create-fragment": "^15.1.0",
