@@ -16,8 +16,8 @@ export default ProjectCreatePage = React.createClass({
     displayName: 'ProjectCreatePage',
 
     propTypes: {
-        currentProject: React.React.PropTypes.object,
-        currentMeetup: React.React.PropTypes.object,
+        currentProject: React.PropTypes.object,
+        currentMeetup: React.PropTypes.object,
         projectId: React.PropTypes.string
     },
 
