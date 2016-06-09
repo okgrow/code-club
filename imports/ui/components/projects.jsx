@@ -71,7 +71,7 @@ class ProjectDetailComponent extends React.Component {
                 return (
                     <button className="btn btn-xs btn-danger pull-right"
                         id="leave-project-button"
-                        onClick={this.leaveProject.bind(this, this.props.project._id)}>
+                        onClick={this.leaveProject.bind(this, _id)}>
                         Leave
                     </button>
                 )
@@ -84,7 +84,7 @@ class ProjectDetailComponent extends React.Component {
                         </a>
 
                         <button className="delete-project btn btn-danger btn-xs pull-right"
-                            onClick={this.deleteProject.bind(this, this.props.project._id)}>
+                            onClick={this.deleteProject.bind(this, _id)}>
                             <i className="fa fa-close"></i>
                         </button>
                     </div>
@@ -93,7 +93,7 @@ class ProjectDetailComponent extends React.Component {
                 return (
                     <button className="btn btn-xs btn-primary pull-right"
                         id="join-project-button"
-                        onClick={this.joinProject.bind(this, this.props.project._id)}>
+                        onClick={this.joinProject.bind(this, _id)}>
                         Join
                     </button>
                 );
