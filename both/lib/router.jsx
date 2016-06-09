@@ -19,10 +19,19 @@ FlowRouter.route('/', {
 });
 
 FlowRouter.route('/add-project', {
-	name: "addProject",
-	action() {
+  name: "addProject",
+  action() {
     mount(MainLayout, {
       content: <ProjectCreateContainer />
     });
-	}
+  }
+});
+
+FlowRouter.route('/edit-project/:projectId/', {
+  name: "editProject",
+  action(params) {
+    mount(MainLayout, {
+      content: <ProjectCreateContainer projectId={ params.projectId } />,
+    });
+  }
 });
