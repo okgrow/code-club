@@ -2,10 +2,10 @@
 import { Meteor } from 'meteor/meteor';
 
 // App
-import { Projects } from '../projects/collections.js';
-import { currentMeetupCursor } from '../meetups/utils.js';
+import { Projects } from '/imports/api/projects/collections.js';
+import { currentMeetupCursor } from '/imports/api/meetups/utils.js';
 
-Meteor.publish('users', function () {
+Meteor.publish('users', () => {
   const currentMeetup = currentMeetupCursor().fetch()[0];
   let userIds = [];
   Projects.find({

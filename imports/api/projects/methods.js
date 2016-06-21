@@ -1,5 +1,6 @@
 // Meteor imports
 import { Meteor } from 'meteor/meteor';
+import { check } from 'meteor/check';
 
 // App Imports
 import { Projects } from './collections.js';

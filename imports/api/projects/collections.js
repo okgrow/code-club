@@ -1,7 +1,7 @@
 // Meteor imports
 import { Mongo } from 'meteor/mongo';
 
-export const Projects = new Mongo.Collection("projects");
+export const Projects = new Mongo.Collection('projects');
 
 Projects.allow({
   insert(userId, doc) {
@@ -16,5 +16,5 @@ Projects.allow({
     // can only remove your own documents
     return doc.ownerId === userId;
   },
-  fetch: ['ownerId']
+  fetch: ['ownerId'],
 });
