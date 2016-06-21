@@ -30,11 +30,7 @@ const retrieveMeetups = () => {
 
   let events = null;
   if (response && response.data) {
-    events = response.data.filter((event) => {
-      if (event.name === 'JS Code Club') {
-        return true;
-      }
-    });
+    events = response.data.filter(event => event.name === 'JS Code Club');
   }
   return events;
 };

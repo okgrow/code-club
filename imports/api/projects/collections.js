@@ -8,7 +8,7 @@ Projects.allow({
     // the user must be logged in, and the document must be owned by the user
     return (userId && doc.ownerId === userId);
   },
-  update(userId, doc, fields, modifier) {
+  update(userId, doc) {
     // can only change your own documents
     return doc.ownerId === userId;
   },
