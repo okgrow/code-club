@@ -17,3 +17,7 @@ Meteor.publish('projects', function () {
     meetupId: currentMeetup._id,
   });
 });
+
+Meteor.publish("projects.currentProject", function (_id) {
+  return Projects.find({ _id });
+});
