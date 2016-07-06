@@ -12,3 +12,7 @@ Meteor.publish("projects", function () {
   var currentMeetup = currentMeetupCursor().fetch()[0];
   return Projects.find({meetupId: currentMeetup._id});
 });
+
+Meteor.publish("projects.currentProject", function (_id) {
+  return Projects.find({ _id });
+});

@@ -7,6 +7,7 @@ import { Meteor } from 'meteor/meteor';
 
 // Atmosphere
 import { createContainer } from 'meteor/react-meteor-data';
+import { FlowRouter } from 'meteor/kadira:flow-router';
 
 // App
 import { Projects } from '/imports/api/projects/collections.js';
@@ -64,28 +65,35 @@ class ProjectDetailComponent extends React.Component {
 
     renderLoggedInContent() {
         if (this.props.currentUser) {
-            const { ownerId, userIds } = this.props.project;
+            const { _id, ownerId, userIds } = this.props.project;
 
             if (userIds && userIds.indexOf(this.props.currentUser._id) !== -1) { // In project
                 return (
                     <button className="btn btn-xs btn-danger pull-right"
                         id="leave-project-button"
-                        onClick={this.leaveProject.bind(this, this.props.project._id)}>
+                        onClick={this.leaveProject.bind(this, _id)}>
                         Leave
                     </button>
                 )
             } else if (ownerId === this.props.currentUser._id) { // Owns project
                 return (
-                    <button className="delete-project btn btn-danger btn-xs pull-right"
-                        onClick={this.deleteProject.bind(this, this.props.project._id)}>
-                        <i className="fa fa-close"></i>
-                    </button>
+                    <div>
+                        <a className="btn btn-primary btn-xs"
+                            href={ FlowRouter.path("editProject", { projectId: _id }) }>
+                            Edit
+                        </a>
+
+                        <button className="delete-project btn btn-danger btn-xs pull-right"
+                            onClick={this.deleteProject.bind(this, _id)}>
+                            <i className="fa fa-close"></i>
+                        </button>
+                    </div>
                 );
             } else { // Rest of the cases
                 return (
                     <button className="btn btn-xs btn-primary pull-right"
                         id="join-project-button"
-                        onClick={this.joinProject.bind(this, this.props.project._id)}>
+                        onClick={this.joinProject.bind(this, _id)}>
                         Join
                     </button>
                 );
