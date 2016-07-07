@@ -9,7 +9,6 @@ kadira:blaze-layout
 accounts-ui
 accounts-meetup
 http
-momentjs:moment
 less
 mrt:bootstrap-3
 fortawesome:fontawesome

@@ -1,5 +1,9 @@
-import { importMeetups } from "../imports/api/meetups/utils.js";
-import { Meetups } from "../imports/api/meetups/collections.js";
+// Meteor imports
+import { Meteor } from 'meteor/meteor';
+
+// APp
+import { importMeetups } from '/imports/api/meetups/utils.js';
+// import { Meetups } from '/imports/api/meetups/collections.js';
 
 
 Meteor.startup(() => {
