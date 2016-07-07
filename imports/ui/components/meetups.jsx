@@ -10,7 +10,7 @@ export default class MeetupComponent extends React.Component {
     }
 
     render() {
-        const { url, name}  = this.props.meetup;
+        const { url, name, time }  = this.props.meetup;
 
         return (
             <div id="meetup-details" className="panel panel-default">
@@ -23,7 +23,7 @@ export default class MeetupComponent extends React.Component {
                         <li className="fa fa-calendar"></li>&nbsp;
                         <a href={url} target="_blank">{name}</a>&nbsp;
                         <li className="fa fa-clock-o"></li>&nbsp;
-                        { moment(this.time).format("dddd, MMMM Do YYYY, h:mm A") }
+                        { moment(time).format("dddd, MMMM Do YYYY, h:mm A") }
                     </p>
                 </div>
             </div>
