@@ -31,3 +31,4 @@ standard-minifier-css@1.2.0
 standard-minifier-js@1.2.0
 react-meteor-data
 shell-server
+force-ssl
